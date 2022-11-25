@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +6,10 @@ main() => runApp(QuizApp());
 
 class QuizApp extends StatelessWidget {
   QuizApp({super.key});
+
+  void answer() {
+    print('Answer button pressed.');
+  }
 
   final quizQuestions = [
     'Qual é a sua cor favorita?',
@@ -23,15 +27,15 @@ class QuizApp extends StatelessWidget {
           children: [
             Text(quizQuestions[0]),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: answer,
               child: Text('Resposta 1'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: answer,
               child: Text('Resposta 1'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: answer,
               child: Text('Resposta 1'),
             ),
           ],
