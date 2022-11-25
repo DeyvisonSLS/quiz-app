@@ -4,10 +4,22 @@ import 'package:flutter/material.dart';
 
 main() => runApp(QuizApp());
 
-class QuizApp extends StatelessWidget {
-  QuizApp({super.key});
+class QuizApp extends StatefulWidget {
+  const QuizApp({super.key});
+
+  @override
+  QuizAppState createState() {
+    return QuizAppState(); // new QuizAppState
+  }
+}
+
+class QuizAppState extends State<QuizApp> {
+  var questionSelected = 0;
 
   void answer() {
+    setState(() {
+      questionSelected++;
+    });
     print('Answer button pressed.');
   }
 
@@ -25,7 +37,7 @@ class QuizApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(quizQuestions[0]),
+            Text(quizQuestions[questionSelected]),
             ElevatedButton(
               onPressed: answer,
               child: Text('Resposta 1'),
