@@ -18,20 +18,36 @@ class QuizApp extends StatefulWidget {
 class _QuizAppState extends State<QuizApp> {
   // Questions Created
   var _questionSelected = 0;
+  var _totalScore = 0;
 
   final _quizQuestions = const [
     // final List<Map<String, Object>> _quizQuestion ...
     {
       'text': 'What is your favorite color?',
-      'answers': ['Black', 'White', 'Yellow', 'Blue']
+      'answers': [
+        {'text': 'Black', 'points': '2'},
+        {'text': 'White', 'points': '5'},
+        {'text': 'Yellow', 'points': '3'},
+        {'text': 'Blue', 'points': '10'},
+      ]
     },
     {
       'text': 'Where were you born?',
-      'answers': ['Santa Cruz', 'São Paulo', 'Natal', 'Mossoró']
+      'answers': [
+        {'text': 'Santa Cruz', 'points': '7'},
+        {'text': 'São Paulo', 'points': '2'},
+        {'text': 'Natal', 'points': '10'},
+        {'text': 'Mossoró', 'points': '2'},
+      ]
     },
     {
       'text': 'What do you prefer?',
-      'answers': ['Car', 'Motorcycle', 'Bicycle', 'Bus']
+      'answers': [
+        {'text': 'Car', 'points': '10'},
+        {'text': 'Motorcycle', 'points': '10'},
+        {'text': 'Bicycle', 'points': '7'},
+        {'text': 'Bus', 'points': '0'},
+      ]
     }
   ];
   // Questions Created
@@ -40,10 +56,11 @@ class _QuizAppState extends State<QuizApp> {
     return _questionSelected < _quizQuestions.length;
   }
 
-  void _nextQuestion() {
+  void _selectQuestion(int score) {
     setState(() {
       if (hasQuestions) {
         _questionSelected++;
+        _totalScore += score;
       }
     });
   }
@@ -59,10 +76,10 @@ class _QuizAppState extends State<QuizApp> {
             ? Quiz(
                 questionSelected: _questionSelected,
                 quizQuestions: _quizQuestions,
-                buttonFunction: _nextQuestion,
+                buttonFunction: _selectQuestion,
               )
-            : const Result(
-                text: 'Parabéns!',
+            : Result(
+                totalScore: _totalScore,
               ),
       ),
     );
