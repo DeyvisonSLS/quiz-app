@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/quiz.dart';
-import './question.dart';
-import './answer_button.dart';
 import './result.dart';
 
-main() => runApp(QuizApp());
+main() => runApp(const QuizApp());
 
 class QuizApp extends StatefulWidget {
   const QuizApp({super.key});
@@ -57,20 +55,30 @@ class _QuizAppState extends State<QuizApp> {
   }
 
   void _selectQuestion(int score) {
-    setState(() {
-      if (hasQuestions) {
+    if (hasQuestions) {
+      setState(() {
         _questionSelected++;
         _totalScore += score;
-      }
+      });
+    }
+
+    // print(_quizQuestions[_questionSelected]);
+  }
+
+  void _restartQuiz() {
+    setState(() {
+      _questionSelected = 0;
+      _totalScore = 0;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Bella Doceteria'),
+          title: const Text('Quiz App'),
         ),
         body: hasQuestions
             ? Quiz(
@@ -80,6 +88,7 @@ class _QuizAppState extends State<QuizApp> {
               )
             : Result(
                 totalScore: _totalScore,
+                restartQuiz: _restartQuiz,
               ),
       ),
     );
